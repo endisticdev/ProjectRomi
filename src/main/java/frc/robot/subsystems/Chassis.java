@@ -51,4 +51,23 @@ public class Chassis extends SubsystemBase {
 
 
   }
+
+  public void reset() {
+    leftEncoder.reset();
+    rightEncoder.reset();
+  }
+
+  public void drive(double speed, int direction) {
+    differentialDrive.arcadeDrive(speed, direction);
+  }
+
+  public void stop() {
+    drive(0, 0);
+  }
+
+  public double getLeftDistance() {
+	  return leftEncoder.getDistance();
+  }
+
+
 }
