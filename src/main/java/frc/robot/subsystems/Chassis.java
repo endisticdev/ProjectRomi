@@ -38,7 +38,8 @@ public class Chassis extends SubsystemBase {
     leftEncoder.setDistancePerPulse(Constants.INCHES_PER_PULSE);
     rightEncoder.setDistancePerPulse(Constants.INCHES_PER_PULSE);
 
-    // I have no clue what this does, but I believe it registers these inputs into the Chassis subsystem
+    // Takes the values from this Chassis into the dashboard,
+    // when playing with the robot.
     addChild("leftEncoder", leftEncoder);
     addChild("rightEncoder", rightEncoder);
 
