@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.Forward;
+import frc.robot.commands.Rotate;
 import frc.robot.subsystems.Chassis;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.PrintCommand;
@@ -21,6 +22,8 @@ import edu.wpi.first.wpilibj2.command.PrintCommand;
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   public static final Chassis chassis = new Chassis();
+  public static final Forward forward = new Forward(20);
+  public static final Rotate rotate = new Rotate(90);
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
@@ -36,6 +39,7 @@ public class RobotContainer {
    */
   private void configureButtonBindings() {
     SmartDashboard.putData("Forward", new Forward(20));
+    SmartDashboard.putData("Rotate", new Rotate(90));
   }
 
   /**

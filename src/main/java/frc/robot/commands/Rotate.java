@@ -5,50 +5,49 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Constants;
 import frc.robot.RobotContainer;
 import frc.robot.subsystems.Chassis;
 
-public class Forward extends CommandBase {
+public class Rotate extends CommandBase {
 
-  double distance;
-
+  double direction;
+  double inches;
   Chassis chassis;
-  /** Creates a new Forward. */
-  public Forward(double inches) {
-    // Use addRequirements() here to declare subsystem dependencies.
-
-    distance = inches;
+  
+  /** Creates a new Rotate. */
+  public Rotate(Integer angle) {
     chassis = RobotContainer.chassis;
-
     addRequirements(chassis);
 
+    inches = Math.abs(angle) * Math.PI * Constants.WHEEL_TRACK / 360.0;
+    direction = 0.10 * Math.signum(angle);
+ 
+    // Use addRequirements() here to declare subsystem dependencies.
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
     chassis.reset();
-    System.out.println("initialize()");
+
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    // Drive at 30% speed, straight forward
-    chassis.altDrive(1, "forward");
-    System.out.println("execut()");
+    chassis.altDrive(0.6, "rotate");
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
     chassis.stop();
-    System.out.println("end()");
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return chassis.getLeftDistance() >= distance;
+    return Math.abs(chassis.getLeftDistance()) >= inches;
   }
 }

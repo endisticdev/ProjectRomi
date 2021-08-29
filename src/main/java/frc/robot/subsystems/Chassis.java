@@ -57,8 +57,20 @@ public class Chassis extends SubsystemBase {
     rightEncoder.reset();
   }
 
-  public void drive(double speed, int direction) {
+  public void drive(double speed, double direction) {
     differentialDrive.arcadeDrive(speed, direction);
+    System.out.println("im driving with speed " + speed + " and direction " + direction);
+  }
+
+  public void altDrive(double power, String moveType) {
+    if(moveType.equals("rotate")) {
+      differentialDrive.tankDrive(power, power + 0.1);
+    } else if (moveType.equals("forward")) {
+      differentialDrive.tankDrive(power * -1, power + 0.1);
+    } else {
+      System.out.println("Bad type!");
+    }
+    System.out.println("im tank driving with speed " + power + " and type " + moveType);
   }
 
   public void stop() {
